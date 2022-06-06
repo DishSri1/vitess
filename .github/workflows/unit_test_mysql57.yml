@@ -101,7 +101,7 @@ jobs:
               bash -exc 'apt-get update  && \
               apt-get install -y sudo && \
               sudo apt-get install -y golang-go && \
-              echo '1024 65535' | sudo tee -a /proc/sys/net/ipv4/ip_local_port_range && \
+              echo "1024 65535" | sudo tee -a /proc/sys/net/ipv4/ip_local_port_range && \
               echo "fs.aio-max-nr = 1048576" | sudo tee -a /etc/sysctl.conf && \
               sudo sysctl -p /etc/sysctl.conf && \
               export DEBIAN_FRONTEND="noninteractive" && \

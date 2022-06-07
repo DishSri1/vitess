@@ -100,7 +100,9 @@ jobs:
               arm64v8/ubuntu:18.04 \
               bash -exc 'apt-get update  && \
               apt-get install -y sudo && \
-              sudo apt-get install -y golang-go && \
+              wget https://go.dev/dl/go1.18.3.linux-arm64.tar.gz && \
+              rm -rf /usr/local/go && tar -C /usr/local -xzf go1.18.3.linux-arm64.tar.gz && \
+              export PATH=$PATH:/usr/local/go/bin && \
               sudo sysctl -p /etc/sysctl.conf && \
               export DEBIAN_FRONTEND="noninteractive" && \
               sudo apt-get update && \
@@ -110,8 +112,8 @@ jobs:
               sudo ln -s /etc/apparmor.d/usr.sbin.mysqld /etc/apparmor.d/disable/ && \
               sudo apparmor_parser -R /etc/apparmor.d/usr.sbin.mysqld || echo "could not remove mysqld profile" && \
               mkdir -p dist bin && \
-              curl -L https://github.com/coreos/etcd/releases/download/v3.3.10/etcd-v3.3.10-linux-amd64.tar.gz | tar -zxC dist && \
-              mv dist/etcd-v3.3.10-linux-amd64/{etcd,etcdctl} bin/ && \
+              curl -L https://github.com/coreos/etcd/releases/download/v3.3.10/etcd-v3.4.17-linux-arm64.tar.gz | tar -zxC dist && \
+              mv dist/etcd-v3.4.17-linux-arm64/{etcd,etcdctl} bin/ && \
               go mod download && \
               go install golang.org/x/tools/cmd/goimports@latest && \
               make tools && \
